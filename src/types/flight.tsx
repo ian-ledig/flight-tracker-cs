@@ -1,6 +1,11 @@
 export interface Flight {
-  callsign: string;
-  originCountry: string;
-  originAirport: string;
-  destinationAirport: string;
+  airlineIata: string;
+  flightNumber: string;
+  depIata: string;
+  arrIata: string;
+  depScheduled: string;
+  arrScheduled: string;
+  depEstimated: string;
+  arrEstimated: string;
+  aircraftIata: string;
 }

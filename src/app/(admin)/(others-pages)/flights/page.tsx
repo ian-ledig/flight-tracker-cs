@@ -3,9 +3,11 @@
 import React, { useState } from 'react';
 import { flightService } from '@/services/flightService';
 import { Flight } from '@/types/flight';
+import Label from '@/components/form/Label';
 
 export default function FlightSearchPage() {
-  const [callsign, setCallsign] = useState('');
+  const [airlineIata, setAirlineIata] = useState('');
+  const [flightNumber, setFlightNumber] = useState('');
   const [flights, setFlights] = useState<Flight[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -16,8 +18,8 @@ export default function FlightSearchPage() {
     setLoading(true);
 
     try {
-      const data = await flightService.getFlightByCallsign(callsign);
-      setFlights([data]);
+      const data = await flightService.getFlights(airlineIata, flightNumber);
+      setFlights(data);
     } catch (err: any) {
       setError(err.message);
       setFlights([]);
@@ -40,17 +42,28 @@ export default function FlightSearchPage() {
       <form onSubmit={handleSearch} className="mb-6">
         <div className="flex max-w-md gap-4">
           <div className="flex-1">
+            <Label>Airline</Label>
             <input
               type="text"
-              value={callsign}
-              onChange={e => setCallsign(e.target.value.toUpperCase())}
-              placeholder="Enter callsign (e.g., WZZ5323)"
+              value={airlineIata}
+              onChange={e => setAirlineIata(e.target.value.toUpperCase())}
+              placeholder="e.g., AA"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+          </div>
+          <div className="flex-1">
+            <Label>Code</Label>
+            <input
+              type="text"
+              value={flightNumber}
+              onChange={e => setFlightNumber(e.target.value.toUpperCase())}
+              placeholder="e.g., 7268"
               className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
           <button
             type="submit"
-            disabled={loading || !callsign}
+            disabled={loading || !airlineIata}
             className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:bg-gray-400"
           >
             {loading ? 'Searching...' : 'Search'}
@@ -72,16 +85,19 @@ export default function FlightSearchPage() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  Callsign
+                  Code
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  Origin Country
+                  Scheduled
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  Origin Airport
+                  Estimated
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  Destination Airport
+                  Route
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                  Aircraft
                 </th>
               </tr>
             </thead>
@@ -89,16 +105,19 @@ export default function FlightSearchPage() {
               {flights.map((flight, index) => (
                 <tr key={index}>
                   <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                    {flight.callsign}
+                    {flight.airlineIata}{flight.flightNumber}
                   </td>
                   <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                    {flight.originCountry}
+                    {flight.depScheduled}
                   </td>
                   <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                    {flight.originAirport}
+                    {flight.depEstimated}
                   </td>
                   <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                    {flight.destinationAirport}
+                    {flight.depIata}→{flight.arrIata}
+                  </td>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
+                    {flight.aircraftIata}
                   </td>
                 </tr>
               ))}
