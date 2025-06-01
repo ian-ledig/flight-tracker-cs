@@ -8,4 +8,9 @@ export interface Flight {
   depEstimated: string;
   arrEstimated: string;
   aircraftIata: string;
+  depLat: number;
+  depLng: number;
+  arrLat: number;
+  arrLng: number;
+  status: string;
 }
