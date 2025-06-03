@@ -108,14 +108,17 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
   const router = useRouter();
 
   useEffect(() => {
+    console.log("welcom")
     const flightIata = params.flightIata.toUpperCase();
     const flightData = sessionStorage.getItem(`flight_${flightIata}`);
+    console.log(flightData);
     if (flightData) {
       const parsedFlight = JSON.parse(flightData);
       setFlight(parsedFlight);
       setLoading(false);
     } else {
-      flightService.getFlights(flightIata)
+      console.log("refetch")
+      flightService.getFlights(flightIata.substring(0, 2), flightIata.substring(2))
         .then((data) => {
           const flightData = Array.isArray(data) ? data[0] : data;
           setFlight(flightData);

@@ -4,10 +4,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { flightService } from '@/services/flightService';
 import { Flight } from '@/types/flight';
+import CheckboxComponents from '@/components/form/form-elements/CheckboxComponents';
+import Checkbox from '@/components/form/input/Checkbox';
 
 export default function FlightSearchPage() {
   const [airlineIata, setAirlineIata] = useState('');
   const [flightNumber, setFlightNumber] = useState('');
+  const [notDeparted, setNotDeparted] = useState(false);
   const [flights, setFlights] = useState<Flight[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +22,7 @@ export default function FlightSearchPage() {
     setLoading(true);
 
     try {
-      const data = await flightService.getFlights(airlineIata, flightNumber);
+      const data = await flightService.getFlights(airlineIata, flightNumber, notDeparted);
       setFlights(data);
     } catch (err: any) {
       setError(err.message);
@@ -33,9 +36,7 @@ export default function FlightSearchPage() {
     const flightIata = `${flight.airlineIata}${flight.flightNumber}`.toUpperCase();
     const key = `flight_${flightIata}`;
     sessionStorage.setItem(key, JSON.stringify(flight));
-    setTimeout(() => {
-      router.push(`/flights/${flightIata}`);
-    }, 100);
+    router.push(`/flights/${flightIata}`);
   };
 
   return (
@@ -67,6 +68,12 @@ export default function FlightSearchPage() {
               placeholder="e.g., 123 (optional)"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+          <div className="flex-1 flex flex-row items-center gap-2 cursor-pointer" onClick={() => setNotDeparted(!notDeparted)}>
+            <Checkbox checked={notDeparted} onChange={setNotDeparted} />
+            <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
+              Not departed
+            </span>
           </div>
           <div className="flex-1">
             <button
