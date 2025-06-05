@@ -13,11 +13,24 @@ import { useMap } from 'react-leaflet';
 
 const typedAirports = airports as Airports;
 
-const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
-const Polyline = dynamic(() => import('react-leaflet').then((mod) => mod.Polyline), { ssr: false });
-const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
+const MapContainer = dynamic(
+  () => import('react-leaflet').then(mod => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then(mod => mod.TileLayer),
+  { ssr: false }
+);
+const Polyline = dynamic(
+  () => import('react-leaflet').then(mod => mod.Polyline),
+  { ssr: false }
+);
+const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), {
+  ssr: false,
+});
+const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), {
+  ssr: false,
+});
 
 const FlightMap = ({
   flight,
@@ -27,13 +40,18 @@ const FlightMap = ({
 }: {
   flight: Flight;
   airplanePosition: [number, number] | null;
-  getCoordinates: { depLat: number | null; depLng: number | null; arrLat: number | null; arrLng: number | null };
+  getCoordinates: {
+    depLat: number | null;
+    depLng: number | null;
+    arrLat: number | null;
+    arrLng: number | null;
+  };
   flightPath: [number, number][];
 }) => {
   const [L, setL] = useState<any>(null);
 
   useEffect(() => {
-    import('leaflet').then((module) => {
+    import('leaflet').then(module => {
       setL(module.default);
     });
   }, []);
@@ -42,7 +60,13 @@ const FlightMap = ({
     const map = useMap();
     const { depLat, depLng, arrLat, arrLng } = getCoordinates;
     useEffect(() => {
-      if (depLat !== null && depLng !== null && arrLat !== null && arrLng !== null && L) {
+      if (
+        depLat !== null &&
+        depLng !== null &&
+        arrLat !== null &&
+        arrLng !== null &&
+        L
+      ) {
         const bounds = L.latLngBounds([depLat, depLng], [arrLat, arrLng]);
         map.fitBounds(bounds, { padding: [50, 50] });
         map.invalidateSize();
@@ -73,42 +97,63 @@ const FlightMap = ({
   const arrAirportName = typedAirports[flight.arrIata]?.name || flight.arrIata;
 
   return (
-    <MapContainer style={{ height: '100%', width: '100%' }} zoom={5} className="rounded-lg">
+    <MapContainer
+      style={{ height: '100%', width: '100%' }}
+      zoom={5}
+      className="rounded-lg"
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <MapCenter />
-      {flightPath.length > 0 && <Polyline positions={flightPath} color="blue" />}
-      <Marker position={[getCoordinates.depLat!, getCoordinates.depLng!]} icon={airportIcon}>
+      {flightPath.length > 0 && (
+        <Polyline positions={flightPath} color="blue" />
+      )}
+      <Marker
+        position={[getCoordinates.depLat!, getCoordinates.depLng!]}
+        icon={airportIcon}
+      >
         <Popup>
           {depAirportName} ({flight.depIata})
         </Popup>
       </Marker>
-      <Marker position={[getCoordinates.arrLat!, getCoordinates.arrLng!]} icon={airportIcon}>
+      <Marker
+        position={[getCoordinates.arrLat!, getCoordinates.arrLng!]}
+        icon={airportIcon}
+      >
         <Popup>
           {arrAirportName} ({flight.arrIata})
         </Popup>
       </Marker>
       {flight.status === 'en route' && airplanePosition && (
         <Marker position={airplanePosition} icon={airplaneIcon}>
-          <Popup>Flight {flight.airlineIata}{flight.flightNumber}</Popup>
+          <Popup>
+            Flight {flight.airlineIata}
+            {flight.flightNumber}
+          </Popup>
         </Marker>
       )}
     </MapContainer>
   );
 };
 
-const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flightIata: string }> }) => {
+const FlightDetailsPage = ({
+  params: paramsPromise,
+}: {
+  params: Promise<{ flightIata: string }>;
+}) => {
   const params = React.use(paramsPromise);
   const [flight, setFlight] = useState<Flight | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [airplanePosition, setAirplanePosition] = useState<[number, number] | null>(null);
+  const [airplanePosition, setAirplanePosition] = useState<
+    [number, number] | null
+  >(null);
   const router = useRouter();
 
   useEffect(() => {
-    console.log("welcom")
+    console.log('welcom');
     const flightIata = params.flightIata.toUpperCase();
     const flightData = sessionStorage.getItem(`flight_${flightIata}`);
     console.log(flightData);
@@ -117,9 +162,10 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
       setFlight(parsedFlight);
       setLoading(false);
     } else {
-      console.log("refetch")
-      flightService.getFlights(flightIata.substring(0, 2), flightIata.substring(2))
-        .then((data) => {
+      console.log('refetch');
+      flightService
+        .getFlights(flightIata.substring(0, 2), flightIata.substring(2))
+        .then(data => {
           const flightData = Array.isArray(data) ? data[0] : data;
           setFlight(flightData);
           setLoading(false);
@@ -135,7 +181,8 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
   }, [params.flightIata]);
 
   const getCoordinates = useMemo(() => {
-    if (!flight) return { depLat: null, depLng: null, arrLat: null, arrLng: null };
+    if (!flight)
+      return { depLat: null, depLng: null, arrLat: null, arrLng: null };
 
     const depAirport = typedAirports[flight.depIata];
     const arrAirport = typedAirports[flight.arrIata];
@@ -200,16 +247,22 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
   }, [getCoordinates]);
 
   if (loading) {
-    return <div className="p-6 text-center text-gray-600">Loading flight details...</div>;
+    return (
+      <div className="p-6 text-center text-gray-600">
+        Loading flight details...
+      </div>
+    );
   }
 
   if (error || !flight) {
     return (
       <div className="p-6">
-        <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">{error || 'Flight not found'}</div>
+        <div className="mb-6 rounded-lg bg-red-100 p-4 text-red-700">
+          {error || 'Flight not found'}
+        </div>
         <button
           onClick={() => router.push('/flights')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
           Back to Search
         </button>
@@ -234,17 +287,19 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
         </h1>
         <button
           onClick={() => router.push('/flights')}
-          className="mt-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+          className="mt-2 rounded-lg bg-gray-600 px-4 py-2 text-white hover:bg-gray-700"
           aria-label="Back to flight search"
         >
           Back to Search
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Flight Info */}
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Flight Information</h2>
+        <div className="rounded-lg bg-white p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold text-gray-800">
+            Flight Information
+          </h2>
           <div className="space-y-2">
             <p>
               <strong>Flight Number:</strong> {flight.airlineIata}
@@ -261,19 +316,27 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
             </p>
             <p>
               <strong>Scheduled Departure:</strong>{' '}
-              {flight.depScheduled ? format(parseISO(flight.depScheduled), 'PPp') : 'N/A'}
+              {flight.depScheduled
+                ? format(parseISO(flight.depScheduled), 'PPp')
+                : 'N/A'}
             </p>
             <p>
               <strong>Estimated Departure:</strong>{' '}
-              {flight.depEstimated ? format(parseISO(flight.depEstimated), 'PPp') : 'N/A'}
+              {flight.depEstimated
+                ? format(parseISO(flight.depEstimated), 'PPp')
+                : 'N/A'}
             </p>
             <p>
               <strong>Scheduled Arrival:</strong>{' '}
-              {flight.arrScheduled ? format(parseISO(flight.arrScheduled), 'PPp') : 'N/A'}
+              {flight.arrScheduled
+                ? format(parseISO(flight.arrScheduled), 'PPp')
+                : 'N/A'}
             </p>
             <p>
               <strong>Estimated Arrival:</strong>{' '}
-              {flight.arrEstimated ? format(parseISO(flight.arrEstimated), 'PPp') : 'N/A'}
+              {flight.arrEstimated
+                ? format(parseISO(flight.arrEstimated), 'PPp')
+                : 'N/A'}
             </p>
             <p>
               <strong>Aircraft:</strong> {flight.aircraftIata || 'N/A'}
@@ -282,8 +345,10 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
         </div>
 
         {/* Interactive Map */}
-        <div className="bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Flight Path</h2>
+        <div className="rounded-lg bg-white p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold text-gray-800">
+            Flight Path
+          </h2>
           {hasCoordinates ? (
             <div className="relative h-[400px] w-full overflow-hidden rounded-lg">
               <FlightMap
@@ -294,11 +359,15 @@ const FlightDetailsPage = ({ params: paramsPromise }: { params: Promise<{ flight
               />
             </div>
           ) : (
-            <div className="text-gray-600 text-center">Coordinates not available for this flight.</div>
+            <div className="text-center text-gray-600">
+              Coordinates not available for this flight.
+            </div>
           )}
           {flight.status !== 'en route' && (
             <div className="mt-4 text-center text-gray-600">
-              {flight.status === 'scheduled' ? 'Flight has not yet departed.' : 'Flight has landed.'}
+              {flight.status === 'scheduled'
+                ? 'Flight has not yet departed.'
+                : 'Flight has landed.'}
             </div>
           )}
         </div>

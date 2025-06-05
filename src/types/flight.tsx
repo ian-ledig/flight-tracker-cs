@@ -3,6 +3,7 @@ export interface Flight {
   flightNumber: string;
   depIata: string;
   arrIata: string;
+  duration: number;
   depScheduled: string;
   arrScheduled: string;
   depEstimated: string;
