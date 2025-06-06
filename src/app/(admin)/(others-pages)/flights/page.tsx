@@ -76,7 +76,7 @@ export default function FlightSearchPage() {
               type="text"
               value={flightNumber}
               onChange={e => setFlightNumber(e.target.value)}
-              placeholder="e.g., 123 (optional)"
+              placeholder="e.g., 123"
               className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200 px-4 py-2 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
             />
           </div>
