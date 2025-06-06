@@ -153,16 +153,13 @@ const FlightDetailsPage = ({
   const router = useRouter();
 
   useEffect(() => {
-    console.log('welcom');
     const flightIata = params.flightIata.toUpperCase();
     const flightData = sessionStorage.getItem(`flight_${flightIata}`);
-    console.log(flightData);
     if (flightData) {
       const parsedFlight = JSON.parse(flightData);
       setFlight(parsedFlight);
       setLoading(false);
     } else {
-      console.log('refetch');
       flightService
         .getFlights(flightIata.substring(0, 2), flightIata.substring(2))
         .then(data => {
@@ -248,7 +245,7 @@ const FlightDetailsPage = ({
 
   if (loading) {
     return (
-      <div className="p-6 text-center text-gray-600">
+      <div className="p-4 sm:p-6 text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
         Loading flight details...
       </div>
     );
@@ -256,13 +253,13 @@ const FlightDetailsPage = ({
 
   if (error || !flight) {
     return (
-      <div className="p-6">
-        <div className="mb-6 rounded-lg bg-red-100 p-4 text-red-700">
+      <div className="p-4 sm:p-6">
+        <div className="mb-6 rounded-lg bg-red-100 dark:bg-red-900 p-4 text-red-700 dark:text-red-300">
           {error || 'Flight not found'}
         </div>
         <button
           onClick={() => router.push('/flights')}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          className="rounded-lg bg-blue-600 dark:bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition duration-300"
         >
           Back to Search
         </button>
@@ -279,15 +276,15 @@ const FlightDetailsPage = ({
     getCoordinates.arrLng !== null;
 
   return (
-    <div className="p-6">
+    <div className="bg-gray-100 dark:bg-gray-900 p-4 sm:p-6">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200">
           Flight {flight.airlineIata}
           {flight.flightNumber} Details
         </h1>
         <button
           onClick={() => router.push('/flights')}
-          className="mt-2 rounded-lg bg-gray-600 px-4 py-2 text-white hover:bg-gray-700"
+          className="mt-2 rounded-lg bg-gray-600 dark:bg-gray-500 px-4 py-2 text-white hover:bg-gray-700 dark:hover:bg-gray-600 transition duration-300"
           aria-label="Back to flight search"
         >
           Back to Search
@@ -296,11 +293,11 @@ const FlightDetailsPage = ({
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Flight Info */}
-        <div className="rounded-lg bg-white p-6 shadow-md">
-          <h2 className="mb-4 text-xl font-semibold text-gray-800">
+        <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md">
+          <h2 className="mb-4 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Flight Information
           </h2>
-          <div className="space-y-2">
+          <div className="space-y-2 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
             <p>
               <strong>Flight Number:</strong> {flight.airlineIata}
               {flight.flightNumber}
@@ -345,8 +342,8 @@ const FlightDetailsPage = ({
         </div>
 
         {/* Interactive Map */}
-        <div className="rounded-lg bg-white p-6 shadow-md">
-          <h2 className="mb-4 text-xl font-semibold text-gray-800">
+        <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md">
+          <h2 className="mb-4 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Flight Path
           </h2>
           {hasCoordinates ? (
@@ -359,12 +356,12 @@ const FlightDetailsPage = ({
               />
             </div>
           ) : (
-            <div className="text-center text-gray-600">
+            <div className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
               Coordinates not available for this flight.
             </div>
           )}
           {flight.status !== 'en route' && (
-            <div className="mt-4 text-center text-gray-600">
+            <div className="mt-4 text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
               {flight.status === 'scheduled'
                 ? 'Flight has not yet departed.'
                 : 'Flight has landed.'}
