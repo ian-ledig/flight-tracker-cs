@@ -16,6 +16,8 @@ import {
   PlugInIcon,
   TableIcon,
   UserCircleIcon,
+  FlightIcon,
+  HomeInfoIcon
 } from '../icons/index';
 import SidebarWidget from './SidebarWidget';
 
@@ -28,7 +30,12 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
-    icon: <GridIcon />,
+    icon: <HomeInfoIcon />,
+    name: 'Informations',
+    path: '/home',
+  },
+  {
+    icon: <FlightIcon />,
     name: 'Flights',
     path: '/flights',
   },
