@@ -4,7 +4,7 @@ import SourceButton from '@/components/header/SourceDropdown';
 import { useSidebar } from '@/context/SidebarContext';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
@@ -22,22 +22,6 @@ const AppHeader: React.FC = () => {
   const toggleApplicationMenu = () => {
     setApplicationMenuOpen(!isApplicationMenuOpen);
   };
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-        event.preventDefault();
-        inputRef.current?.focus();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
 
   return (
     <header className="sticky top-0 z-99999 flex w-full border-gray-200 bg-white lg:border-b dark:border-gray-800 dark:bg-gray-900">
