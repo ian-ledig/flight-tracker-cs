@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { flightService } from '@/services/flightService';
 import { Flight } from '@/types/flight';
 import Checkbox from '@/components/form/input/Checkbox';
+import { formatDuration } from '@/utils/FormatDuration';
 
 export default function FlightSearchPage() {
   const [airlineIata, setAirlineIata] = useState('');
@@ -176,15 +177,4 @@ export default function FlightSearchPage() {
       )}
     </div>
   );
-}
-
-function formatDuration(minutes?: number): string {
-  if (minutes == null || isNaN(minutes)) return 'N/A';
-
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-
-  if (hours > 0 && mins > 0) return `${hours}h ${mins}min`;
-  if (hours > 0) return `${hours}h`;
-  return `${mins}min`;
 }

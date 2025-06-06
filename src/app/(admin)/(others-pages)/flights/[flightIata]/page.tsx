@@ -10,6 +10,7 @@ import airports from '@/data/airports.json';
 import 'leaflet/dist/leaflet.css';
 import { Airports } from '@/types/airport';
 import { useMap } from 'react-leaflet';
+import { formatDuration } from '@/utils/FormatDuration';
 
 const typedAirports = airports as Airports;
 
@@ -108,7 +109,14 @@ const FlightMap = ({
       />
       <MapCenter />
       {flightPath.length > 0 && (
-        <Polyline positions={flightPath} color="blue" />
+        <Polyline 
+          positions={flightPath} 
+          pathOptions={{
+            color: '#465fff',
+            weight: 3,
+            opacity: 1,
+          }} 
+        />
       )}
       <Marker
         position={[getCoordinates.depLat!, getCoordinates.depLng!]}
@@ -337,6 +345,9 @@ const FlightDetailsPage = ({
             </p>
             <p>
               <strong>Aircraft:</strong> {flight.aircraftIata || 'N/A'}
+            </p>
+            <p>
+              <strong>Duration:</strong> {formatDuration(flight.duration) || 'N/A'}
             </p>
           </div>
         </div>
