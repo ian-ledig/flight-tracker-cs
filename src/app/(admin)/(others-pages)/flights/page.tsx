@@ -6,7 +6,7 @@ import { flightService } from '@/services/flightService';
 import { Flight } from '@/types/flight';
 import Checkbox from '@/components/form/input/Checkbox';
 import FlightDashboard from '@/components/flight-dashboard/flight-dashboard';
-import { formatDuration } from '@/utils/FormatDuration';
+import { formatDuration } from '@/utils/formatDuration';
 
 export default function FlightSearchPage() {
   const [airlineIata, setAirlineIata] = useState('');

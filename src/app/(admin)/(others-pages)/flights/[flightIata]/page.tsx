@@ -10,7 +10,7 @@ import airports from '@/data/airports.json';
 import 'leaflet/dist/leaflet.css';
 import { Airports } from '@/types/airport';
 import { useMap } from 'react-leaflet';
-import { formatDuration } from '@/utils/FormatDuration';
+import { formatDuration } from '@/utils/formatDuration';
 
 const typedAirports = airports as Airports;
 
