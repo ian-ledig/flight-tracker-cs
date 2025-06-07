@@ -13,6 +13,7 @@
 </p>
 
 ## Demo <a id="demo"></a>
+### SOON
 <div align="center">
   <video width="600" autoplay loop muted playsinline>
     <source src="public/demo/flight-tracker-demo.mp4" type="video/mp4">
@@ -95,6 +96,7 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
 </p>
 
 ## デモ <a id="japanese"></a>
+### SOON
 <div align="center">
   <video width="600" autoplay loop muted playsinline>
     <source src="public/demo/flight-tracker-demo.mp4" type="video/mp4">
