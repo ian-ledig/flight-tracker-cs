@@ -3,10 +3,10 @@
   <h1>Flight Tracker (Frontend)</h1>
 </div>
 
-<div align="center">
-  <button onclick="document.getElementById('english').scrollIntoView()">English</button>
-  <button onclick="document.getElementById('japanese').scrollIntoView()">日本語</button>
-</div>
+<p align="center">
+  <a href="#english"><kbd>English</kbd></a>
+  <a href="#japanese"><kbd>日本語</kbd></a>
+</p>
 
 ## Demo <a id="demo"></a>
 <div align="center">
@@ -81,10 +81,10 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
   <h1>フライトトラッカー（フロントエンド）</h1>
 </div>
 
-<div align="center">
-  <button onclick="document.getElementById('english').scrollIntoView()">English</button>
-  <button onclick="document.getElementById('japanese').scrollIntoView()">日本語</button>
-</div>
+<p align="center">
+  <a href="#english"><kbd>English</kbd></a>
+  <a href="#japanese"><kbd>日本語</kbd></a>
+</p>
 
 ## デモ <a id="japanese"></a>
 <div align="center">
