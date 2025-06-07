@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  basePath: '/flighttracker',
-  assetPrefix: '/flighttracker/',
+  basePath: '/flight-tracker',
+  assetPrefix: '/flight-tracker/',
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
