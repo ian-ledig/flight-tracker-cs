@@ -109,13 +109,13 @@ const FlightMap = ({
       />
       <MapCenter />
       {flightPath.length > 0 && (
-        <Polyline 
-          positions={flightPath} 
+        <Polyline
+          positions={flightPath}
           pathOptions={{
             color: '#465fff',
             weight: 3,
             opacity: 1,
-          }} 
+          }}
         />
       )}
       <Marker
@@ -253,7 +253,7 @@ const FlightDetailsPage = ({
 
   if (loading) {
     return (
-      <div className="p-4 sm:p-6 text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+      <div className="p-4 text-center text-sm text-gray-600 sm:p-6 sm:text-base dark:text-gray-400">
         Loading flight details...
       </div>
     );
@@ -262,12 +262,12 @@ const FlightDetailsPage = ({
   if (error || !flight) {
     return (
       <div className="p-4 sm:p-6">
-        <div className="mb-6 rounded-lg bg-red-100 dark:bg-red-900 p-4 text-red-700 dark:text-red-300">
+        <div className="mb-6 rounded-lg bg-red-100 p-4 text-red-700 dark:bg-red-900 dark:text-red-300">
           {error || 'Flight not found'}
         </div>
         <button
           onClick={() => router.push('/flights')}
-          className="rounded-lg bg-blue-600 dark:bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition duration-300"
+          className="rounded-lg bg-blue-600 px-4 py-2 text-white transition duration-300 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
         >
           Back to Search
         </button>
@@ -284,15 +284,15 @@ const FlightDetailsPage = ({
     getCoordinates.arrLng !== null;
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 p-4 sm:p-6">
+    <div className="bg-gray-100 p-4 sm:p-6 dark:bg-gray-900">
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200">
+        <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl dark:text-gray-200">
           Flight {flight.airlineIata}
           {flight.flightNumber} Details
         </h1>
         <button
           onClick={() => router.push('/flights')}
-          className="mt-2 rounded-lg bg-gray-600 dark:bg-gray-500 px-4 py-2 text-white hover:bg-gray-700 dark:hover:bg-gray-600 transition duration-300"
+          className="mt-2 rounded-lg bg-gray-600 px-4 py-2 text-white transition duration-300 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600"
           aria-label="Back to flight search"
         >
           Back to Search
@@ -301,11 +301,11 @@ const FlightDetailsPage = ({
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Flight Info */}
-        <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md">
-          <h2 className="mb-4 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200">
+        <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+          <h2 className="mb-4 text-xl font-semibold text-gray-800 sm:text-2xl dark:text-gray-200">
             Flight Information
           </h2>
-          <div className="space-y-2 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+          <div className="space-y-2 text-sm text-gray-600 sm:text-base dark:text-gray-400">
             <p>
               <strong>Flight Number:</strong> {flight.airlineIata}
               {flight.flightNumber}
@@ -347,14 +347,15 @@ const FlightDetailsPage = ({
               <strong>Aircraft:</strong> {flight.aircraftIata || 'N/A'}
             </p>
             <p>
-              <strong>Duration:</strong> {formatDuration(flight.duration) || 'N/A'}
+              <strong>Duration:</strong>{' '}
+              {formatDuration(flight.duration) || 'N/A'}
             </p>
           </div>
         </div>
 
         {/* Interactive Map */}
-        <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md">
-          <h2 className="mb-4 text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200">
+        <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+          <h2 className="mb-4 text-xl font-semibold text-gray-800 sm:text-2xl dark:text-gray-200">
             Flight Path
           </h2>
           {hasCoordinates ? (
@@ -367,12 +368,12 @@ const FlightDetailsPage = ({
               />
             </div>
           ) : (
-            <div className="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+            <div className="text-center text-sm text-gray-600 sm:text-base dark:text-gray-400">
               Coordinates not available for this flight.
             </div>
           )}
           {flight.status !== 'en route' && (
-            <div className="mt-4 text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+            <div className="mt-4 text-center text-sm text-gray-600 sm:text-base dark:text-gray-400">
               {flight.status === 'scheduled'
                 ? 'Flight has not yet departed.'
                 : 'Flight has landed.'}

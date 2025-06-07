@@ -8,7 +8,7 @@ import {
   ChevronDownIcon,
   HorizontaLDots,
   FlightIcon,
-  HomeInfoIcon
+  HomeInfoIcon,
 } from '../icons/index';
 
 type NavItem = {
@@ -301,7 +301,7 @@ const AppSidebar: React.FC = () => {
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                   othersItems.length > 0 && 'Others'
+                  othersItems.length > 0 && 'Others'
                 ) : (
                   <HorizontaLDots />
                 )}

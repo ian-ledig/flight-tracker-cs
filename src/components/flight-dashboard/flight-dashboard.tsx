@@ -38,7 +38,7 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
       medium: 0, // 3-6h
       long: 0, // >6h
     };
-    flights.forEach((flight) => {
+    flights.forEach(flight => {
       const duration = flight.duration || 0;
       if (duration < 180) counts.short += 1;
       else if (duration <= 360) counts.medium += 1;
@@ -159,24 +159,33 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
     },
   };
 
-  const statusChartSeries = [{ name: 'Flights', data: Object.values(statusCounts) }];
+  const statusChartSeries = [
+    { name: 'Flights', data: Object.values(statusCounts) },
+  ];
   const durationChartSeries = [
-    { name: 'Flights', data: [durationCounts.short, durationCounts.medium, durationCounts.long] },
+    {
+      name: 'Flights',
+      data: [durationCounts.short, durationCounts.medium, durationCounts.long],
+    },
   ];
 
   return (
-    <div className="mb-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
       {/* Total Flights */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex items-center justify-center">
+      <div className="flex items-center justify-center rounded-lg bg-white p-4 shadow-md dark:bg-gray-800">
         <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">Total Flights</p>
-          <p className="text-xl font-bold text-gray-900 dark:text-gray-100">{totalFlights}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Total Flights
+          </p>
+          <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
+            {totalFlights}
+          </p>
         </div>
       </div>
 
       {/* Status Chart */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-        <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+      <div className="rounded-lg bg-white p-4 shadow-md dark:bg-gray-800">
+        <h2 className="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
           Flight Status
         </h2>
         <div className="w-full">
@@ -190,8 +199,8 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
       </div>
 
       {/* Duration Chart */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
-        <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+      <div className="rounded-lg bg-white p-4 shadow-md dark:bg-gray-800">
+        <h2 className="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
           Flight Duration
         </h2>
         <div className="w-full">

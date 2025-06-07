@@ -1,10 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  GithubIcon,
-  DownloadIcon,
-} from '../../icons/index';
+import { GithubIcon, DownloadIcon } from '../../icons/index';
 import { DropdownItem } from '../ui/dropdown/DropdownItem';
 import { Dropdown } from '../ui/dropdown/Dropdown';
 
@@ -12,23 +9,23 @@ export default function SourceButton() {
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-      e.stopPropagation();
-      setIsOpen(prev => !prev);
-    }
+    e.stopPropagation();
+    setIsOpen(prev => !prev);
+  }
 
-    function openSourceClient() {
-      closeDropdown();
-      window.open("https://github.com/ian-ledig/flight-tracker-cs", "_blank");
-    }
+  function openSourceClient() {
+    closeDropdown();
+    window.open('https://github.com/ian-ledig/flight-tracker-cs', '_blank');
+  }
 
-    function openSourceServer() {
-      closeDropdown();
-      window.open("https://github.com/ian-ledig/flight-tracker-ss", "_blank");
-    }
-  
-    function closeDropdown() {
-      setIsOpen(false);
-    }
+  function openSourceServer() {
+    closeDropdown();
+    window.open('https://github.com/ian-ledig/flight-tracker-ss', '_blank');
+  }
+
+  function closeDropdown() {
+    setIsOpen(false);
+  }
   return (
     <div className="relative">
       <button
