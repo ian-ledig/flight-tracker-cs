@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { flightService } from '@/services/flightService';
 import { Flight } from '@/types/flight';
 import Checkbox from '@/components/form/input/Checkbox';
+import FlightDashboard from '@/components/flight-dashboard/flight-dashboard';
 import { formatDuration } from '@/utils/FormatDuration';
 
 export default function FlightSearchPage() {
@@ -86,7 +87,7 @@ export default function FlightSearchPage() {
             onClick={() => setLongHaul(!longHaul)}
           >
             <Checkbox checked={longHaul} onChange={setLongHaul} />
-            <span className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <span className="block text font-medium text-gray-700 dark:text-gray-300">
               Long haul
             </span>
           </div>
@@ -107,6 +108,8 @@ export default function FlightSearchPage() {
           {error}
         </div>
       )}
+
+      {flights.length > 0 && <FlightDashboard flights={flights} />}
 
       {flights.length > 0 ? (
         <div className="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-md">
