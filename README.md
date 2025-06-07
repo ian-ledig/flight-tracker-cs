@@ -4,8 +4,12 @@
 </div>
 
 <p align="center">
-  <a href="#english"><kbd>English</kbd></a>
-  <a href="#japanese"><kbd>日本語</kbd></a>
+  <a href="#english">
+    <img src="https://img.shields.io/badge/English-blue?style=for-the-badge" alt="English">
+  </a>
+  <a href="#japanese">
+    <img src="https://img.shields.io/badge/日本語-blue?style=for-the-badge" alt="Japanese">
+  </a>
 </p>
 
 ## Demo <a id="demo"></a>
@@ -82,8 +86,12 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
 </div>
 
 <p align="center">
-  <a href="#english"><kbd>English</kbd></a>
-  <a href="#japanese"><kbd>日本語</kbd></a>
+  <a href="#english">
+    <img src="https://img.shields.io/badge/English-blue?style=for-the-badge" alt="English">
+  </a>
+  <a href="#japanese">
+    <img src="https://img.shields.io/badge/日本語-blue?style=for-the-badge" alt="Japanese">
+  </a>
 </p>
 
 ## デモ <a id="japanese"></a>
