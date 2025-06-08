@@ -44,24 +44,29 @@ Flight Tracker is a modern, user-friendly web application built with Next.js, de
 - Access to the `flight-tracker-ss` backend server ([GitHub](https://github.com/ian-ledig/flight-tracker-ss)).
 
 ## Installation
-
 1. **Clone the Repository**:
-
    ```bash
    git clone https://github.com/ian-ledig/flight-tracker-cs.git
    cd flight-tracker-cs
    ```
 
 2. **Install Dependencies**:
-
    ```bash
    npm install
    ```
 
-3. **Configure the Backend**:
+3. **Configure the Environment**:
+   Create a `.env` file in the root of the project to specify the backend server connection. Add the following configuration:
+   ```bash
+   NEXT_PUBLIC_SERVER_HOST=localhost
+   NEXT_PUBLIC_SERVER_PORT=8080
+   ```
+   > **Important**: Ensure these values match the host and port where your `flight-tracker-ss` backend server is running. The defaults (`localhost` and `8080`) assume the backend is running locally on the default port.
+
+4. **Configure the Backend**:
    Ensure the `flight-tracker-ss` backend server is running and properly configured (see [flight-tracker-ss README](https://github.com/ian-ledig/flight-tracker-ss)).
 
-4. **Run the Application**:
+5. **Run the Application**:
    ```bash
    npm run dev
    ```
@@ -140,24 +145,29 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
 - `flight-tracker-ss`バックエンドサーバーへのアクセス（[GitHub](https://github.com/ian-ledig/flight-tracker-ss)）。
 
 ## インストール
-
 1. **リポジトリをクローン**：
-
    ```bash
    git clone https://github.com/ian-ledig/flight-tracker-cs.git
    cd flight-tracker-cs
    ```
 
 2. **依存関係をインストール**：
-
    ```bash
    npm install
    ```
 
-3. **バックエンドの設定**：
+3. **環境設定**：
+   プロジェクトのルートに`.env`ファイルを作成し、バックエンドサーバーへの接続を指定します。以下の設定を追加：
+   ```bash
+   NEXT_PUBLIC_SERVER_HOST=localhost
+   NEXT_PUBLIC_SERVER_PORT=8080
+   ```
+   > **重要**: これらの値が`flight-tracker-ss`バックエンドサーバーが動作しているホストおよびポートと一致していることを確認してください。デフォルト値（`localhost`および`8080`）は、バックエンドがローカルでデフォルトポートで動作していることを前提としています。
+
+4. **バックエンドの設定**：
    `flight-tracker-ss`バックエンドサーバーが動作し、適切に設定されていることを確認（[flight-tracker-ss README](https://github.com/ian-ledig/flight-tracker-ss)を参照）。
 
-4. **アプリケーションの実行**：
+5. **アプリケーションの実行**：
    ```bash
    npm run dev
    ```
