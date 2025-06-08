@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
+const basePath = nextConfig.basePath;
+
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
 
@@ -71,7 +73,7 @@ const AppHeader: React.FC = () => {
               width={154}
               height={32}
               className="dark:hidden"
-              src="/images/logo/logo.svg"
+              src={`${basePath}/images/logo/logo.svg`}
               alt="Logo"
             />
             <Image
