@@ -54,6 +54,7 @@ import BellIcon from './bell.svg';
 import FlightIcon from './flight.svg';
 import HomeInfoIcon from './home-info.svg';
 import GithubIcon from './github.svg';
+import LinkIcon from './link.svg';
 
 export {
   DownloadIcon,
@@ -112,4 +113,5 @@ export {
   FlightIcon,
   HomeInfoIcon,
   GithubIcon,
+  LinkIcon,
 };

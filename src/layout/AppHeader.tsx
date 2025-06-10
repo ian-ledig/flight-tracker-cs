@@ -5,6 +5,7 @@ import { useSidebar } from '@/context/SidebarContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import nextConfig from '../../next.config';
 
 const basePath = nextConfig.basePath;
 
@@ -80,7 +81,7 @@ const AppHeader: React.FC = () => {
               width={154}
               height={32}
               className="hidden dark:block"
-              src="/images/logo/logo-dark.svg"
+              src={`${basePath}/images/logo/logo-dark.svg`}
               alt="Logo"
             />
           </Link>
