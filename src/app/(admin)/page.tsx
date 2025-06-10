@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 export default function FlightSearchInfoPage() {
@@ -134,12 +135,12 @@ export default function FlightSearchInfoPage() {
             Ready to explore upcoming flights? Head over to the search page to
             start using Flight Tracker!
           </p>
-          <a
+          <Link
             href="/flights"
             className="inline-block rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition duration-300 hover:bg-blue-700 sm:px-6 sm:py-3 dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             Start Searching
-          </a>
+          </Link>
         </section>
       </div>
     </div>

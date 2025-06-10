@@ -44,13 +44,16 @@ Flight Tracker is a modern, user-friendly web application built with Next.js, de
 - Access to the `flight-tracker-ss` backend server ([GitHub](https://github.com/ian-ledig/flight-tracker-ss)).
 
 ## Installation
+
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/ian-ledig/flight-tracker-cs.git
    cd flight-tracker-cs
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    npm install
    ```
@@ -145,13 +148,16 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
 - `flight-tracker-ss`バックエンドサーバーへのアクセス（[GitHub](https://github.com/ian-ledig/flight-tracker-ss)）。
 
 ## インストール
+
 1. **リポジトリをクローン**：
+
    ```bash
    git clone https://github.com/ian-ledig/flight-tracker-cs.git
    cd flight-tracker-cs
    ```
 
 2. **依存関係をインストール**：
+
    ```bash
    npm install
    ```

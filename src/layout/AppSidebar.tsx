@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import nextConfig from '../../next.config';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -11,6 +12,8 @@ import {
   HomeInfoIcon,
 } from '../icons/index';
 import nextConfig from '../../next.config';
+
+const basePath = nextConfig.basePath;
 
 const basePath = nextConfig.basePath;
 
