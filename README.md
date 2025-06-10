@@ -60,10 +60,12 @@ Flight Tracker is a modern, user-friendly web application built with Next.js, de
 
 3. **Configure the Environment**:
    Create a `.env` file in the root of the project to specify the backend server connection. Add the following configuration:
+
    ```bash
    NEXT_PUBLIC_SERVER_HOST=localhost
    NEXT_PUBLIC_SERVER_PORT=8080
    ```
+
    > **Important**: Ensure these values match the host and port where your `flight-tracker-ss` backend server is running. The defaults (`localhost` and `8080`) assume the backend is running locally on the default port.
 
 4. **Configure the Backend**:
@@ -164,10 +166,12 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
 
 3. **環境設定**：
    プロジェクトのルートに`.env`ファイルを作成し、バックエンドサーバーへの接続を指定します。以下の設定を追加：
+
    ```bash
    NEXT_PUBLIC_SERVER_HOST=localhost
    NEXT_PUBLIC_SERVER_PORT=8080
    ```
+
    > **重要**: これらの値が`flight-tracker-ss`バックエンドサーバーが動作しているホストおよびポートと一致していることを確認してください。デフォルト値（`localhost`および`8080`）は、バックエンドがローカルでデフォルトポートで動作していることを前提としています。
 
 4. **バックエンドの設定**：
