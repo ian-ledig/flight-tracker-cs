@@ -7,7 +7,9 @@ export const flightService = {
     longHaul?: boolean
   ): Promise<Flight[]> {
     try {
-      const url = new URL(`http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/flights/${airlineIata}`);
+      const url = new URL(
+        `http://${process.env.NEXT_PUBLIC_SERVER_HOST}:${process.env.NEXT_PUBLIC_SERVER_PORT}/api/flights/${airlineIata}`
+      );
       if (flightNumber) {
         url.searchParams.append('flightNumber', flightNumber);
       }

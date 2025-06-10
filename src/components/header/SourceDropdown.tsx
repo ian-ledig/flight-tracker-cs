@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { GithubIcon, DownloadIcon } from '../../icons/index';
+import { GithubIcon, LinkIcon } from '../../icons/index';
 import { DropdownItem } from '../ui/dropdown/DropdownItem';
 import { Dropdown } from '../ui/dropdown/Dropdown';
 
@@ -52,7 +52,7 @@ export default function SourceButton() {
               tag="a"
               className="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              <DownloadIcon />
+              <LinkIcon />
               Client
             </DropdownItem>
           </li>
@@ -62,7 +62,7 @@ export default function SourceButton() {
               tag="a"
               className="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              <DownloadIcon />
+              <LinkIcon />
               Server
             </DropdownItem>
           </li>

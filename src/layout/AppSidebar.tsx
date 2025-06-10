@@ -11,6 +11,9 @@ import {
   FlightIcon,
   HomeInfoIcon,
 } from '../icons/index';
+import nextConfig from '../../next.config';
+
+const basePath = nextConfig.basePath;
 
 const basePath = nextConfig.basePath;
 
