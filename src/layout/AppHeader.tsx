@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import nextConfig from '../../next.config';
+import WebsiteButton from '@/components/header/WebsiteButton';
 
 const basePath = nextConfig.basePath;
 
@@ -112,6 +113,9 @@ const AppHeader: React.FC = () => {
           } shadow-theme-md w-full items-center justify-between gap-4 px-5 py-4 lg:flex lg:justify-end lg:px-0 lg:shadow-none`}
         >
           <div className="2xsm:gap-3 flex items-center gap-2">
+            {/* <!-- Main website button link --> */}
+            <WebsiteButton />
+
             {/* <!-- Dark Mode Toggler --> */}
             <ThemeToggleButton />
 
