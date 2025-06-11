@@ -62,6 +62,7 @@ Flight Tracker is a modern, user-friendly web application built with Next.js, de
    Create a `.env` file in the root of the project to specify the backend server connection. Add the following configuration:
 
    ```bash
+   NEXT_PUBLIC_SERVER_PROTOCOL=http
    NEXT_PUBLIC_SERVER_HOST=localhost
    NEXT_PUBLIC_SERVER_PORT=8080
    ```
@@ -168,6 +169,7 @@ For questions or feedback, please contact the project maintainer at [ian.ledigjp
    プロジェクトのルートに`.env`ファイルを作成し、バックエンドサーバーへの接続を指定します。以下の設定を追加：
 
    ```bash
+   NEXT_PUBLIC_SERVER_PROTOCOL=http
    NEXT_PUBLIC_SERVER_HOST=localhost
    NEXT_PUBLIC_SERVER_PORT=8080
    ```
