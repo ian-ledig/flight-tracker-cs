@@ -8,7 +8,7 @@ export const flightService = {
   ): Promise<Flight[]> {
     try {
       const url = new URL(
-        `http://${process.env.NEXT_PUBLIC_SERVER_HOST}:${process.env.NEXT_PUBLIC_SERVER_PORT}/api/flights/${airlineIata}`
+        `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_HOST}:${process.env.NEXT_PUBLIC_SERVER_PORT}/api/flights/${airlineIata}`
       );
       if (flightNumber) {
         url.searchParams.append('flightNumber', flightNumber);
