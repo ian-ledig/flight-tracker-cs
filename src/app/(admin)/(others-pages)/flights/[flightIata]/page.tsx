@@ -11,7 +11,9 @@ import 'leaflet/dist/leaflet.css';
 import { Airports } from '@/types/airport';
 import { useMap } from 'react-leaflet';
 import { formatDuration } from '@/utils/formatDuration';
+import nextConfig from '../../../../../../next.config';
 
+const basePath = nextConfig.basePath;
 const typedAirports = airports as Airports;
 
 const MapContainer = dynamic(
@@ -79,7 +81,7 @@ const FlightMap = ({
   if (!L) return null;
 
   const airportIcon = new L.Icon({
-    iconUrl: '/images/icons/airport.svg',
+    iconUrl: `${basePath}/images/icons/airport.svg`,
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30],
@@ -87,7 +89,7 @@ const FlightMap = ({
   });
 
   const airplaneIcon = new L.Icon({
-    iconUrl: '/images/icons/aircraft.svg',
+    iconUrl: `${basePath}/images/icons/aircraft.svg`,
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30],
