@@ -31,7 +31,7 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
   const durationCounts = useMemo(() => {
     const counts = {
       short: 0,
-      medium: 0, 
+      medium: 0,
       long: 0,
     };
     flights.forEach(flight => {
