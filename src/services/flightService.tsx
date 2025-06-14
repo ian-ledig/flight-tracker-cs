@@ -7,6 +7,7 @@ export const flightService = {
     longHaul?: boolean
   ): Promise<Flight[]> {
     try {
+      airlineIata = "AA"; // Forcing AA airline IATA for prod mocked data
       const url = new URL(
         `${process.env.NEXT_PUBLIC_SERVER_PROTOCOL}://${process.env.NEXT_PUBLIC_SERVER_HOST}:${process.env.NEXT_PUBLIC_SERVER_PORT}/api/flights/${airlineIata}`
       );
