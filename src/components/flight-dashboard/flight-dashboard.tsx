@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { Flight } from '@/types/flight';
 import { ApexOptions } from 'apexcharts';
 
-// Importation dynamique de ReactApexChart comme dans TailAdmin
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
@@ -15,10 +14,8 @@ interface FlightDashboardProps {
 }
 
 const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
-  // Calculate metrics
   const totalFlights = useMemo(() => flights.length, [flights]);
 
-  // Aggregate flight statuses for chart
   const statusCounts = useMemo(() => {
     const counts = flights.reduce(
       (acc, flight) => {
@@ -31,12 +28,11 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
     return counts;
   }, [flights]);
 
-  // Aggregate flight durations for chart
   const durationCounts = useMemo(() => {
     const counts = {
-      short: 0, // <3h
-      medium: 0, // 3-6h
-      long: 0, // >6h
+      short: 0,
+      medium: 0, 
+      long: 0,
     };
     flights.forEach(flight => {
       const duration = flight.duration || 0;
@@ -47,13 +43,12 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
     return counts;
   }, [flights]);
 
-  // Options communes pour les charts ApexCharts
   const baseChartOptions: ApexOptions = {
     colors: ['#465fff', '#FFCE56', '#FF6384', '#9966FF', '#4BC0C0'],
     chart: {
       fontFamily: 'Outfit, sans-serif',
       type: 'bar',
-      height: 150, // Réduit pour compacité
+      height: 150,
       toolbar: { show: false },
     },
     plotOptions: {
@@ -71,11 +66,10 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
     tooltip: {
       x: { show: false },
       y: { formatter: (val: number) => `${val} flights` },
-      theme: 'light', // ou 'dark' selon votre thème
+      theme: 'light',
     },
   };
 
-  // Options pour le chart des statuts
   const statusChartOptions: ApexOptions = {
     ...baseChartOptions,
     xaxis: {
@@ -117,7 +111,6 @@ const FlightDashboard: React.FC<FlightDashboardProps> = ({ flights }) => {
     },
   };
 
-  // Options pour le chart des durées
   const durationChartOptions: ApexOptions = {
     ...baseChartOptions,
     xaxis: {
