@@ -7,6 +7,7 @@ import { Flight } from '@/types/flight';
 import Checkbox from '@/components/form/input/Checkbox';
 import FlightDashboard from '@/components/flight-dashboard/FlightDashboard';
 import { formatDuration } from '@/utils/formatDuration';
+import NotificationCard from '@/components/notification/NotificationCard';
 
 export default function FlightSearchPage() {
   const [airlineIata, setAirlineIata] = useState('');
@@ -47,6 +48,11 @@ export default function FlightSearchPage() {
 
   return (
     <div className="bg-gray-100 p-4 sm:p-6 dark:bg-gray-900">
+      <NotificationCard
+        message="Please note: Mock data is being used for this demo."
+        type="info"
+      />
+
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl dark:text-gray-200">
           Flight Tracker
