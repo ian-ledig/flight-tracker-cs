@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { flightService } from '@/services/flightService';
 import { Flight } from '@/types/flight';
 import Checkbox from '@/components/form/input/Checkbox';
-import FlightDashboard from '@/components/flight-dashboard/flight-dashboard';
+import FlightDashboard from '@/components/flight-dashboard/FlightDashboard';
 import { formatDuration } from '@/utils/formatDuration';
 
 export default function FlightSearchPage() {
