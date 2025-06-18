@@ -3,9 +3,13 @@
 import { LinkSmallIcon } from '@/icons';
 import React from 'react';
 
-export default function WebsiteButton() {
+type WebsiteButtonProps = {
+  href: string;
+};
+
+export default function WebsiteButton({ href }: WebsiteButtonProps) {
   function onClick() {
-    window.open('https://ian-ledig.com', '_blank');
+    window.open(href, '_blank');
   }
 
   return (
@@ -15,7 +19,7 @@ export default function WebsiteButton() {
         onClick={onClick}
       >
         <LinkSmallIcon />
-        <p className="pl-2">ian-ledig.com</p>
+        <p className="pl-2">{href.replace(/^https?:\/\//, '')}</p>
       </button>
     </div>
   );
