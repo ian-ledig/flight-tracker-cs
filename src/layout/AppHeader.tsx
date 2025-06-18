@@ -114,7 +114,7 @@ const AppHeader: React.FC = () => {
         >
           <div className="2xsm:gap-3 flex items-center gap-2">
             {/* <!-- Main website button link --> */}
-            <WebsiteButton />
+            <WebsiteButton href='https://ian-ledig.com' />
 
             {/* <!-- Dark Mode Toggler --> */}
             <ThemeToggleButton />
