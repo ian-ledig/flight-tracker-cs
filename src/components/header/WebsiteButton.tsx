@@ -19,7 +19,7 @@ export default function WebsiteButton({ href }: WebsiteButtonProps) {
         onClick={onClick}
       >
         <LinkSmallIcon />
-        <p className="pl-2">{ href.replace(/^https?:\/\//, '') }</p>
+        <p className="pl-2">{href.replace(/^https?:\/\//, '')}</p>
       </button>
     </div>
   );
