@@ -15,13 +15,15 @@ export default function FlightSearchPage() {
   const [longHaul, setLongHaul] = useState(false);
   const [flights, setFlights] = useState<Flight[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [detailsLoading, setDetailsLoading] = useState<number | null>();
   const router = useRouter();
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
+    setSearchLoading(true);
+    setDetailsLoading(null);
 
     try {
       const data = await flightService.getFlights(
@@ -34,11 +36,12 @@ export default function FlightSearchPage() {
       setError(err.message);
       setFlights([]);
     } finally {
-      setLoading(false);
+      setSearchLoading(false);
     }
   };
 
-  const viewFlight = (flight: Flight) => {
+  const viewFlight = (flight: Flight, index: number) => {
+    setDetailsLoading(index);
     const flightIata =
       `${flight.airlineIata}${flight.flightNumber}`.toUpperCase();
     const key = `flight_${flightIata}`;
@@ -102,10 +105,10 @@ export default function FlightSearchPage() {
           <div className="flex-1">
             <button
               type="submit"
-              disabled={loading || !airlineIata}
+              disabled={searchLoading || !airlineIata}
               className="my-5 rounded-lg bg-blue-600 px-4 py-2 text-white transition duration-300 hover:bg-blue-700 disabled:bg-gray-400 dark:bg-blue-500 dark:hover:bg-blue-600 dark:disabled:bg-gray-600"
             >
-              {loading ? 'Searching...' : 'Search'}
+              {searchLoading ? 'Searching...' : 'Search'}
             </button>
           </div>
         </div>
@@ -165,11 +168,17 @@ export default function FlightSearchPage() {
                   </td>
                   <td className="px-6 py-4 text-sm whitespace-nowrap">
                     <button
-                      onClick={() => viewFlight(flight)}
+                      onClick={() => viewFlight(flight, index)}
                       className="rounded-lg bg-blue-600 px-4 py-2 text-white transition duration-300 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
                       aria-label={`View details for flight ${flight.airlineIata}${flight.flightNumber}`}
                     >
-                      View
+                      <div className="flex items-center justify-center w-12 h-5">
+                        {detailsLoading === index ? (
+                          <span className="w-4 h-4 border-2 border-blue-200 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          <span className="text-sm">View</span>
+                        )}
+                      </div>
                     </button>
                   </td>
                 </tr>
@@ -179,7 +188,7 @@ export default function FlightSearchPage() {
         </div>
       ) : (
         !error &&
-        !loading && (
+        !searchLoading && (
           <div className="text-center text-sm text-gray-600 sm:text-base dark:text-gray-400">
             No flights found. Try searching with an airline code and optional
             flight number.
