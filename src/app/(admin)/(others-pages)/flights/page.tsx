@@ -172,9 +172,9 @@ export default function FlightSearchPage() {
                       className="rounded-lg bg-blue-600 px-4 py-2 text-white transition duration-300 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
                       aria-label={`View details for flight ${flight.airlineIata}${flight.flightNumber}`}
                     >
-                      <div className="flex items-center justify-center w-12 h-5">
+                      <div className="flex h-5 w-12 items-center justify-center">
                         {detailsLoading === index ? (
-                          <span className="w-4 h-4 border-2 border-blue-200 border-t-white rounded-full animate-spin" />
+                          <span className="h-4 w-4 animate-spin rounded-full border-2 border-blue-200 border-t-white" />
                         ) : (
                           <span className="text-sm">View</span>
                         )}
